@@ -6,10 +6,6 @@ import plotly.data as pldata
 
 
 df = px.data.gapminder() #columns: country continent  year  lifeExp pop   gdpPercap iso_alpha  iso_num
-
-print(df.head())
-print(df.columns)
-
 countries = df["country"].unique() # countries = df["country"].drop_duplicates()
 
 
@@ -21,7 +17,6 @@ server = app.server
 app.layout = html.Div(
     children=[
         html.H1("Gapminder Country Dashboard"),
-
         dcc.Dropdown(                         
             id="country-dropdown",
             options=[{"label": c, "value": c} for c in countries],
@@ -42,7 +37,6 @@ app.layout = html.Div(
 )
 def update_graph(selected_country: str):
     filtered = df[df["country"] == selected_country]
-
     fig_gdp = px.line(
         filtered,
         x="year",
@@ -55,6 +49,6 @@ def update_graph(selected_country: str):
 
 
 
-# Run the app
-if __name__ == "__main__": 
-    app.run(debug=True) 
+# Run the app locally (not needed for Render)
+# if __name__ == "__main__": 
+#     app.run(debug=True) 
